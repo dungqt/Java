@@ -1,0 +1,143 @@
+==============================Java==============================
+- Java là một một ngôn ngữ lập trình hiện đại, bậc cao, hướng đối tượng, bảo mật và mạnh mẽ.
+và là một Platform.
+- Phát triển bởi Sun Microsystems vào 1995
+- Phân loại Java Platforms :
++ JAVA SE: nền tảng lập trình java. Bao gồm các api lập trình java: java.sql, java.math ...
++ JAVA EE: dùng cho doanh nghiệp -> phát triển các ứng dụng web.
++ JAVA ME: cho ứng dụng di động
++ JAVA FX: 1 nền tảng phần mềm phát triển các ứng dụng Internet có thể chạy trên nhiều loại thiết bị, nhiều hệ điều hành.
+
+
+=> Write once, run anywhere
+(viết 1 lần ở windows nhưng có thể chạy trên linux, android ...)
+
+
+==============================Platform==============================
+
+Platform: Bất cứ môi trường phần cứng hoặc phần mềm nào mà trong đó có một chương trình chạy,
+thì được hiểu như là một Platform. Với môi trường runtime riêng cho mình (JRE) và API,
+Java được gọi là Platform
+
+
+==============================JVM ( JAVA VIRTUAL MACHINE)
+1. Khái niệm
+- Là một thiết bị trừu tượng (ảo) có thể giúp máy tính chạy các chương trình java.
+- Nó cung cấp môi trường runtime mà trong đó Java Bytecode có thể được thực thi
+
+2.Nhiệm vụ
+
+https://viettuts.vn/images/java/jvm.jpg
+- Tải code
+- Kiểm tra code
+- Thực thi code
+- Cung cấp môi trường runtime
+
+B1: ClassLoader
+- được sử dụng để load class file
+B2:  Memory Areas Allocated by JVM
+- Class Area: lưu trữ cấu trúc của lớp, hằng, trường , dữ liệu phương thức , code method
+- Heap: Nó là khu vực dữ liệu runtime mà trong đó đối tượng được cấp phát ( cấp phát động, kích thước vùng nhớ động).
++ Được sử dụng chung trong các Thread
+- Stack: Stack trong Java lưu giữ các Frame. (cấp phát tĩnh, kích thước vùng nhớ cố định)
++ Nó giữ các biến cục bộ, tham số input và các kết quả cục bộ, và thực hiện một phần nhiệm vụ trong lời gọi phương thứvà trả về phương thức. Mỗi Thread có một Stack riêng, được tạo tại cùng thời điểm với Thread.
++ Một Frame mới được tạo mỗi khi một phương thức được gọi và bị hủy khi phương thức thực hiện xong.
+
+=>heap,stack đều lưu trong RAM
+- Program Counter Register: chứa đại chỉ của chỉ lệnh JVM hiện tại đang được thực thi.
+- Native Method Stack: bao gồm tất cả các method tự nhiên được sử dụng trong ứng dụng
+
+B3: Execution Engine
+- Một bộ xử lý ảo Virtual Processor
+- Một trình thông dịch Interpreter. Đọc Bytecode Stream sau đó thực thi các chỉ thị.
+
+B4: Just-In-Time (JIT) Compiler
+- được sử dụng để cải thiện hiệu suất.
+- JIT biên dịch các phần của Bytecode (câu lệnh) mà có cùng tính năng tại cùng một thời điểm,
+và vì thế giảm lượng thời gian cần thiết để biên dịch.
+- Ở đây khái niệm Compiler là một bộ biên dịch tập chỉ thị của JVM thành tập chỉ thị của một CPU cụ thể.
+============================== JRE (Java Runtime Environment)
+- Được sử dụng  để cung cấp môi trường runtime
+- Nó là trình triển khai của JVM
+- bao gồm tập hợp các thư viện và các file khác mà JVM sử dụng tại runtime và JVM
+============================== JDK (Java Development Kit)
+- bao gồm JRE và Development Tool (javac , java...)
+============================== Lỗi biên dịch, lỗi runtime
+
+
+============================== biên dịch , run file
+- javac filename.java => file code
+- java filename.class => file class là file đã được biên dịch
+
+==============================Lớp String
+- String trong java là bất biến, không thể thay đổi được => quản lý bộ nhớ hiệu quả
+- Cách tạo
++ literal
+
+String s1 = "123"
+String s2 = "123"
+-> giá trị 123 sẽ được đưa vào trong pool , s1 -> sẽ tham chiếu đến giá trị đó
+s2 cũng sẽ tham chiếu đến giá trị 123 trong pool (pool sẽ không tạo giá trị 123 mới )
+
++ new
+String s1  = new ("123")
+-> giá trị 123 sẽ đưa vào pool , 1 biến trung gian trong heap sẽ đc tạo để tham chiếu tới 123 , s -> sẽ tham chiếu đến biến trung gian đó.
+
+=> nối chuỗi => tạo thể hiện mới trong pool => k hiệu quả
+
+
+==============================Exception
+- Bao gồm :
++ ngoại lệ checked : ngoại lệ sinh ra trong compile-time
++ ngoại lệ unchecked : sinh ra trong run-time (RuntimeException , Error)
+- Từ khóa throw :
++ Sử dụng trong thân hàm
++ dùng để ném ra 1 ngoại lệ
+
+- Từ khóa throws
++ khai báo 1 ngoại lệ (khai báo cùng với khai báo tên hàm)
++ chỉ được khai báo ngoại lệ checked
+
+
+- call stack ( stack lưu lại thứ tự gọi các phương thức )
++ nếu ngoại lệ xảy ra ở phương thức con -> nếu nó không catch -> thì sẽ gọi đến phuương thức dưới nó -> nếu ở đây có catch thì sẽ được xử lý
+=> chỉ áp dụng cho ngoại lệ unchecked
+
+==============================Lớp lồng nhau
+=> lớp trong có thể truy cập đến các thuộc tính và phương thức của lớp ngoài ( áp dụng cho class cha là class hoặc interface )
+=> sẽ biên dịch thành các file khác nhau ( lớp ngoài 1 file, mỗi lớp trong là 1 file)
+Bao gồm :
+- non-static
++ member inner class (class inner phải tạo ngoài phương thức )
+class A{
+    class B {
+
+    }
+}
+
+
++ anonymous inner class
+
+Demo d = new Demo(){
+       void x (){
+
+       }
+}
+
+=> sẽ tạo ra 2 file (file con có tên sẽ do trình biên dịch tạo )
+=> kế thừa -> sẽ có thể ghi đè phương thức cha
+
++ local inner class (class tạo trong phương thức )
+=> muốn gọi đến phương thức trong inner class => thì phải tạo thể hiện của inner class trong phương thức đó
+
+- static
+=> các class bên trong khai báo là static
+=> chỉ truy cập được các thuộc tính, phương thức static của lớp ngoài
+=> nếu muốn truy cập vào các thuộc tinh, phương thức non-static sử dụng đối tượng lớp
++ static nested class
+
+==============================Nested interface
+=> được bao bọc bên ngoài là class hoặc interface => nó không thể truy cập trực tiếp
+- interface được khai báo là public nếu bên ngoài là interface
+- interface được khai báo bất kì nếu bên ngoài là class
+
